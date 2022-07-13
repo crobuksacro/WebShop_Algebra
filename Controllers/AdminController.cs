@@ -25,7 +25,7 @@ namespace WebShop.Controllers
         {
             var order = await productService.SuspendOrder(id);
             return RedirectToAction("Orders");
-        }
+        } 
 
 
         [HttpGet]

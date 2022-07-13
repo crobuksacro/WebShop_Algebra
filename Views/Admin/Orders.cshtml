@@ -36,7 +36,7 @@
                 <td>@string.Format("{0:C}",totalPrice)</td>
                 <td>@string.Format("{0:C}",totalPriceWithVat)</td>
                 <td> @Html.ActionLink("Detalji", "Order", new {  id=order.Id  },new {@class= "btn btn-primary"})</td>
-                <td>
+                <td> 
 
                     @switch (order.ShoppingCart.ShoppingCartStatus)
                     {
