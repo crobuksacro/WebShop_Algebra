@@ -1,0 +1,40 @@
+﻿@using WebShop.Models.ViewModel
+@model List<ProductViewModel>
+@{
+    int counter = 1;
+}
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Title</th>
+            <th scope="col">Description</th>
+            <th scope="col">Price</th>
+            <th scope="col">Quantity</th>
+            <th scope="col">Edit</th>
+        </tr>
+    </thead>
+    <tbody>
+
+        @foreach (var product in Model)
+        {
+            <tr>
+                <th scope="row">@counter</th>
+                <td>@product.Title</td>
+                <td>@product.Description</td>
+                <td>@product.Price</td>
+                <td>@product.Quantity</td>
+                <td> @Html.ActionLink("Edit","UpdateProduct","Admin",new {id= product.Id},new {@class = "btn btn-primary"})</td>
+            </tr>
+            counter++;
+        }
+
+
+
+    </tbody>
+</table>
+
+
+<a class="btn btn-primary" href="@Url.Action("AddProduct", "Admin")">Dodaj novi proizvod</a>
+<a class="btn btn-primary" href="@Url.Action("AddProductCategory", "Admin")">Dodaj novu kategoriju</a>

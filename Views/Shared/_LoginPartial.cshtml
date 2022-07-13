@@ -1,0 +1,64 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using WebShop.Models.Dbo
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+@{
+    var user = await UserManager.GetUserAsync(User);
+
+}
+
+
+
+<ul class="navbar-nav">
+    @if (user != null)
+    {
+
+
+        var userRoles = await UserManager.GetRolesAsync(user);
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @user.Firstname @user.Lastname!</a>
+        </li>
+
+        @switch (userRoles[0])
+        {
+            case Roles.Admin:
+                <li class="nav-item">
+                    <a class="nav-link text-dark" href="@Url.Action("ProductAdministration", "Admin")">Administracija proizvoda</a>
+
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-dark" href="@Url.Action("Orders", "Admin")">Narudžbe</a>
+
+                </li>
+                break;
+            case Roles.Employee:
+                <li class="nav-item">
+                    <a class="nav-link text-dark" href="@Url.Action("ShoppingCart", "Home")">Košarica</a>
+
+                </li>
+                break;
+        }
+
+
+
+
+
+
+        <li class="nav-item">
+            <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                <button type="submit" class="nav-link btn btn-link text-dark">Logout</button>
+            </form>
+        </li>
+    }
+    else
+    {
+
+
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Register">Register</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Login">Login</a>
+        </li>
+    }
+</ul>
