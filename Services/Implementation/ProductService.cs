@@ -251,8 +251,26 @@ namespace WebShop.Services.Implementation
         }
         private async Task<ShoppingCartViewModel> AddItemToShoppingCartAsync(ShoppingCartBinding model)
         {
+
+
+            var dbo = await db.ShoppingCart
+                .Include(x => x.ShoppingCartItems)
+                .ThenInclude(x => x.Product)
+                .FirstOrDefaultAsync(x => x.Id == model.ShoppingCartId.GetValueOrDefault());
             var product = await db.Product.FindAsync(model.ProductId);
             product.Quantity -= model.Quantity;
+
+
+            var presentShoppingCartItem = dbo.ShoppingCartItems.FirstOrDefault(x => x.Product.Id == model.ProductId);
+           
+
+            if (presentShoppingCartItem != null)
+            {
+                presentShoppingCartItem.Quantity += model.Quantity;
+                await db.SaveChangesAsync();
+                return mapper.Map<ShoppingCartViewModel>(dbo);
+            }
+
 
             var user = await db.Users.FirstOrDefaultAsync(x => x.Id == model.UserId);
             if (product == null || user == null)
@@ -269,10 +287,6 @@ namespace WebShop.Services.Implementation
                 Quantity = model.Quantity
             };
 
-
-            var dbo = await db.ShoppingCart
-                .Include(x => x.ShoppingCartItems)
-                .FirstOrDefaultAsync(x => x.Id == model.ShoppingCartId.GetValueOrDefault());
             if (dbo == null)
             {
                 return null;
