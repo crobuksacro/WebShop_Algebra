@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/WebShop.styles.css" asp-append-version="true" />
+    @RenderSection("aditionalccsSection", required: false)
 </head>
 <body>
     <header>
@@ -36,6 +37,8 @@
             @RenderBody()
         </main>
     </div>
+
+    @RenderSection("modalSection", required: false);
 
     <footer class="border-top footer text-muted">
         <div class="container">
