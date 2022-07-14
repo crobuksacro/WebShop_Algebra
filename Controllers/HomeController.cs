@@ -22,6 +22,23 @@ namespace WebShop.Controllers
             _logger = logger;
         }
 
+
+        [HttpGet]
+        public async Task<IActionResult> SuspendShoppingCartItem(int id)
+        {
+           await productService.SuspendShoppingCartItem(id);
+            return RedirectToAction("ShoppingCart");
+        }
+
+
+        [HttpGet]
+        public async Task<IActionResult> SuspendShoppingCart(int id)
+        {
+            var shoppingCart = await productService.SuspendShoppingCart(id);
+            return RedirectToAction("ShoppingCart");
+        }
+
+
         public IActionResult Index()
         {
             return View(productService.GetProductsAsync().Result);

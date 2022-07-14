@@ -18,7 +18,7 @@
             <th scope="col">Iznos bez PDVa</th>
             <th scope="col">Iznos s PDVom</th>
             <th scope="col">Detalji</th>
-            <th scope="col">Suspendiraj</th>
+            <th scope="col">Storno</th>
         </tr>
     </thead>
     <tbody>
@@ -41,7 +41,7 @@
                     @switch (order.ShoppingCart.ShoppingCartStatus)
                     {
                         case ShoppingCartStatus.Succeeded:
-                            @Html.ActionLink("Suspendiraj", "SuspendOrder", new {  id=order.Id  },new {@class= "btn btn-danger"})
+                            @Html.ActionLink("Storno", "SuspendOrder", new {  id=order.Id  },new {@class= "btn btn-danger"})
                             break;
                         case ShoppingCartStatus.Suspended:
                             <span>Narudžba je suspendirana</span>

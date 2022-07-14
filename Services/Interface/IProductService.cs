@@ -5,6 +5,8 @@ namespace WebShop.Services.Interface
 {
     public interface IProductService
     {
+        Task SuspendShoppingCartItem(int shoppingCartItemId);
+        Task<ShoppingCartViewModel> SuspendShoppingCart(int id);
         Task<OrderViewModel> SuspendOrder(int id);
         Task<ProductViewModel> UpdateProductAsync(ProductUpdateBinding model);
         Task UpdateShoppinCartStatus();

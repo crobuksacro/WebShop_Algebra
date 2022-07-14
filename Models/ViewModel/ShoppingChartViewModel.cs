@@ -11,7 +11,7 @@ namespace WebShop.Models.ViewModel
         {
             decimal totalPrice = 0;
 
-            if (ApplicationUser == null)
+            if (ShoppingCartItems == null)
             {
                 return default;
             }

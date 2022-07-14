@@ -31,8 +31,8 @@ namespace WebShop.Services.Implementation
         /// <returns></returns>
         public async Task<OrderViewModel> SuspendOrder(int id)
         {
-            var order =await db.Order
-                .Include(x=>x.ShoppingCart)
+            var order = await db.Order
+                .Include(x => x.ShoppingCart)
                   .ThenInclude(x => x.ShoppingCartItems)
                    .ThenInclude(x => x.Product)
                 .FirstOrDefaultAsync(x => x.Id == id);
@@ -40,6 +40,70 @@ namespace WebShop.Services.Implementation
             await db.SaveChangesAsync();
             return mapper.Map<OrderViewModel>(order);
         }
+
+
+        public async Task SuspendShoppingCartItem(int shoppingCartItemId)
+        {
+
+            var shoppingCartItem = await db.ShoppingCartItem
+                .Include(x => x.ShoppingCart)
+                .ThenInclude(x => x.ShoppingCartItems)
+                .FirstOrDefaultAsync(x => x.Id == shoppingCartItemId);
+
+            if (shoppingCartItem == null)
+            {
+                return;
+            }
+
+
+            if (shoppingCartItem.ShoppingCart.ShoppingCartItems.Count == 1)
+            {
+                await SuspendShoppingCart(shoppingCartItem.ShoppingCart.Id);
+                return;
+            }
+
+
+            try
+            {
+                shoppingCartItem.ShoppingCart.ShoppingCartItems.Remove(shoppingCartItem);
+                await db.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+
+
+
+            return;
+
+        }
+
+
+        /// <summary>
+        /// Storniraj košaricu
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public async Task<ShoppingCartViewModel> SuspendShoppingCart(int id)
+        {
+            var shoppingCart = await db.ShoppingCart
+                .Include(x => x.ShoppingCartItems)
+                .ThenInclude(x => x.Product)
+                .FirstOrDefaultAsync(x => x.Id == id);
+            if (shoppingCart == null)
+            {
+                return null;
+            }
+
+            SuspendShoppingCart(shoppingCart);
+            await db.SaveChangesAsync();
+
+            return mapper.Map<ShoppingCartViewModel>(shoppingCart);
+
+        }
+
 
         /// <summary>
         /// Dodavanje narudzbe
@@ -348,7 +412,7 @@ namespace WebShop.Services.Implementation
         public async Task<ProductViewModel> UpdateProductAsync(ProductUpdateBinding model)
         {
             var category = await db.ProductCategory.FirstOrDefaultAsync(x => x.Id == model.ProductCategoryId);
-            var dbo = await db.Product.FindAsync(model.Id);         
+            var dbo = await db.Product.FindAsync(model.Id);
             mapper.Map(model, dbo);
             dbo.ProductCategory = category;
             await db.SaveChangesAsync();

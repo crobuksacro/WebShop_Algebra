@@ -32,7 +32,7 @@
 
     @if (Model != null)
     {
-            string documentStatus = Model.ShoppingCartStatus.ToString();
+        string documentStatus = Model.ShoppingCartStatus.ToString();
 
         <div class="card">
             <div class="card-header">
@@ -53,11 +53,6 @@
                         <div>Email: @user.Email</div>
                         <div>Phone: @user.PhoneNumber</div>
                     </div>
-
-
-
-
-
                 </div>
 
                 <div class="table-responsive-sm">
@@ -70,6 +65,7 @@
                                 <th class="right">Kategorija</th>
                                 <th class="center">Količina</th>
                                 <th class="right">Cijena</th>
+                                <th class="right">Ukloni artikl</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -84,6 +80,7 @@
                                     <td class="right">@item.Product.ProductCategory.Title</td>
                                     <td class="center">@item.Quantity</td>
                                     <td class="right">@item.Price</td>
+                                    <td>    @Html.ActionLink("Ukloni", "SuspendShoppingCartItem", new {  id=item.Id  },new {@class= "btn btn-danger"})</td>
                                 </tr>
 
                                 counter++;
@@ -99,8 +96,8 @@
                     </table>
                 </div>
                 <div class="row">
-                    <div class="col-lg-4 col-sm-5">
-                    </div>
+                    @*            <div class="col-lg-4 col-sm-5">
+                </div>*@
 
                     <div class="col-lg-4 col-sm-5 ml-auto">
                         <table class="table table-clear">
@@ -133,19 +130,23 @@
                                 </tr>
                             </tbody>
                         </table>
-
                     </div>
-                    @if (Model != null)
-                    {
-                        using (Html.BeginForm())
+                </div>
+                <div class="row mt-5">
+                    <div class="col-lg-1 col-sm-5 ml-auto">
+                        @if (Model != null)
                         {
-                            <input type="text" name="ShoppingCartId" value="@Model.Id" hidden>
-                            <input type="submit" class="btn btn-success" value="Kupi">
+                            using (Html.BeginForm())
+                            {
+                                <input type="text" name="ShoppingCartId" value="@Model.Id" hidden>
+                                <input type="submit" class="btn btn-success" value="Kupi">
+
+                            }
                         }
-                    }
-
-
-
+                    </div>
+                    <div class="col-lg-1 col-sm-5 ml-auto">
+                        @Html.ActionLink("Storno", "SuspendShoppingCart", new {  id=Model.Id  },new {@class= "btn btn-danger"})
+                    </div>
 
                 </div>
 
@@ -163,7 +164,7 @@
                 <p class="card-text">Pogledajte našu ponudu!</p>
                 @Html.ActionLink("Ponuda","Index","Home",null,new {@class = "btn btn-primary"})
 
-         @*       <a href="#" class="btn btn-primary">Go somewhere</a>*@
+                @*       <a href="#" class="btn btn-primary">Go somewhere</a>*@
             </div>
         </div>
     }
