@@ -25,6 +25,9 @@ namespace WebShop.Mapping
 
             CreateMap<AdressBinding, Adress>();
             CreateMap<Adress, AdressViewModel>();
+            CreateMap<UserBinding, ApplicationUser>()
+                .ForMember(dst=> dst.UserName, opts => opts.MapFrom(src=> src.Email))
+                .ForMember(dst => dst.EmailConfirmed, opts => opts.MapFrom(src => true));
         }
     }
 }

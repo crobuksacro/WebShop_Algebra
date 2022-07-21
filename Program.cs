@@ -5,6 +5,7 @@ using WebShop.Services.Interface;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using WebShop.Models.Dto;
+using System.IdentityModel.Tokens.Jwt;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,7 +15,21 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(connectionString));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
+builder.Services.AddDefaultIdentity<ApplicationUser>(options =>
+//options.SignIn.RequireConfirmedAccount = true,
+
+{
+    options.SignIn.RequireConfirmedAccount = true;
+    options.Password.RequireNonAlphanumeric = false;
+    options.Password.RequireDigit = false;
+    options.SignIn.RequireConfirmedEmail = false;
+    options.Password.RequireUppercase = false;
+    options.Password.RequireLowercase = false;
+    options.User.AllowedUserNameCharacters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._@+";
+    options.ClaimsIdentity.UserIdClaimType = JwtRegisteredClaimNames.Jti;
+
+})
+
     .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<ApplicationDbContext>();
 
@@ -25,6 +40,7 @@ builder.Services.AddControllersWithViews();
 
 builder.Services.Configure<AppConfig>(builder.Configuration);
 builder.Services.AddSingleton<IIdentityService, IdentityService>();
+builder.Services.AddScoped<IUserSevice, UserSevice>();
 builder.Services.AddScoped<IProductService, ProductService>();
 builder.Services.AddScoped<ICustomerService, CustomerService>();
 builder.Services.AddSingleton<Microsoft.Extensions.Hosting.IHostedService, QueueProcessor>();
