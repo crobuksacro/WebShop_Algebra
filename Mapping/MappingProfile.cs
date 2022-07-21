@@ -9,6 +9,8 @@ namespace WebShop.Mapping
     {
         public MappingProfile()
         {
+            CreateMap<UserBinding, ApplicationUser>();
+
             CreateMap<ProductBinding, Product>();
             CreateMap<Product, ProductViewModel>();
             CreateMap<ProductCategoryBinding, ProductCategory>();
