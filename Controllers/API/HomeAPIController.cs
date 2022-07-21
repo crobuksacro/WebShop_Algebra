@@ -6,6 +6,7 @@ using WebShop.Services.Interface;
 namespace WebShop.Controllers
 {
     [Route("api/[controller]")]
+    [ApiController]
     public class HomeAPIController : ControllerBase
     {
         private readonly ILogger<HomeController> _logger;

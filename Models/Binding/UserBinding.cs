@@ -1,4 +1,6 @@
-﻿namespace WebShop.Models.Binding
+﻿using Newtonsoft.Json;
+
+namespace WebShop.Models.Binding
 {
     public class UserBinding
     {

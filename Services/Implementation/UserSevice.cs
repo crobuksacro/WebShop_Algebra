@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Identity;
 using WebShop.Models.Binding;
 using WebShop.Models.Dbo;
+using WebShop.Models.ViewModel;
 using WebShop.Services.Interface;
 
 namespace WebShop.Services.Implementation
@@ -17,6 +18,18 @@ namespace WebShop.Services.Implementation
             this.userManager = userManager;
             this.roleManager = roleManager;
             this.mapper = mapper;
+        }
+
+
+        public async Task<ApplicationUserViewModel?> CreateApiUserAsync(UserBinding model, string role)
+        {
+            var result =await CreateUserAsync(model, role);
+            if(result == null)
+            {
+                return null;
+            }
+            return mapper.Map<ApplicationUserViewModel>(result);
+
         }
 
 
