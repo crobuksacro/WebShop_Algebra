@@ -1,16 +1,12 @@
-﻿using WebShop.Models;
-using WebShop.Models.Binding;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using WebShop.Models.Dbo;
 using WebShop.Services.Interface;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
-using System.Diagnostics;
 
 namespace WebShop.Controllers
 {
-    //[Authorize]
-    public class HomeAPIController : Controller
+    [Route("api/[controller]")]
+    public class HomeAPIController : ControllerBase
     {
         private readonly ILogger<HomeController> _logger;
         private readonly IProductService productService;
@@ -24,10 +20,10 @@ namespace WebShop.Controllers
 
 
 
-
-        public IActionResult Index()
+        [Route("products")]
+        public async Task<IActionResult> Products()
         {
-            return View(productService.GetProductsAsync().Result);
+            return Ok(await productService.GetProductsAsync());
         }
 
       
