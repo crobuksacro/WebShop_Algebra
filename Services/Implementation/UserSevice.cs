@@ -27,13 +27,9 @@ namespace WebShop.Services.Implementation
             {
                 return null;
             }
-
             var user = mapper.Map<ApplicationUser>(model);
             var adress = mapper.Map<Adress>(model.UserAdress);
             user.Adress = new List<Adress>() { adress };
-
-            //user.UserName = model.Email;
-            //user.EmailConfirmed = true;
             var createdUser = await userManager.CreateAsync(user, model.Password);
             if (createdUser.Succeeded)
             {
