@@ -7,7 +7,10 @@
         public const string BasicUser = "BasicUser";
         public const string Employee = "Employee";
     }
-
+    public static class CorsPolicy
+    {
+        public const string AllowAll = "AllowAllCors";
+    }
     public enum ShoppingCartStatus
     {
         Pending,
