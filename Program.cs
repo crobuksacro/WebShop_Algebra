@@ -36,6 +36,8 @@ builder.Services.AddDefaultIdentity<ApplicationUser>(options =>
     .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<ApplicationDbContext>();
 
+builder.Services.AddOpenApiDocument();
+
 
 builder.Services.AddCors(options =>
 {
@@ -90,6 +92,12 @@ else
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
+
+#region Swagger
+app.UseOpenApi(); // serve OpenAPI/Swagger documents
+app.UseSwaggerUi3(); // serve Swagger UI
+app.UseReDoc();
+#endregion
 
 app.UseRouting();
 app.UseCors(CorsPolicy.AllowAll);
