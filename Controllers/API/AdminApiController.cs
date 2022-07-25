@@ -1,14 +1,17 @@
-﻿using WebShop.Models;
-using WebShop.Models.Binding;
-using WebShop.Services.Interface;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
-using AutoMapper;
+using WebShop.Models;
+using WebShop.Services.Interface;
 
 namespace WebShop.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [EnableCors(CorsPolicy.AllowAll)]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = Roles.Admin)]
     public class AdminApiController : Controller
     {
         private readonly IProductService productService;
