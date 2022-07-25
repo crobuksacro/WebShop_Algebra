@@ -22,6 +22,8 @@ namespace WebShop.Mapping
 
             CreateMap<ProductViewModel, ProductUpdateBinding>();
             CreateMap<ProductUpdateBinding, Product>();
+            CreateMap<ProductUpdateApiBinding, Product>();
+
 
             CreateMap<AdressBinding, Adress>();
             CreateMap<Adress, AdressViewModel>();
