@@ -208,6 +208,44 @@ namespace WebShop.Services.Implementation
             return mapper.Map<ShoppingCartViewModel>(shoppingCart);
 
         }
+
+        public async Task<ShoppingCartViewModel> AddShoppingCartAsync(ShoppingCartApiBinding model, string userId)
+        {
+            //if (model.ShoppingCartId.HasValue)
+            //{
+            //    return await AddItemToShoppingCartAsync(model);
+            //}
+
+            var product = await db.Product.FindAsync(model.ProductId);
+            product.Quantity -= model.Quantity;
+
+            var user = await db.Users.FirstOrDefaultAsync(x => x.Id == userId);
+            if (product == null || user == null)
+            {
+                return null;
+            }
+
+            var shoppingCartItem = new ShoppingCartItem
+            {
+                Price = model.Price,
+                Product = product,
+                Quantity = model.Quantity
+            };
+
+
+            var dbo = new ShoppingCart
+            {
+                ShoppingCartItems = new List<ShoppingCartItem> { shoppingCartItem },
+                ApplicationUser = user,
+                ShoppingCartStatus = Models.ShoppingCartStatus.Pending
+
+            };
+            db.ShoppingCart.Add(dbo);
+            await db.SaveChangesAsync();
+            return mapper.Map<ShoppingCartViewModel>(dbo);
+
+        }
+
         /// <summary>
         /// Dodavanje nove košarice
         /// </summary>
