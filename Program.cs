@@ -49,6 +49,8 @@ builder.Services.AddCors(options =>
 
 builder.Services.AddAutoMapper(typeof(Program));
 
+builder.Services.AddOpenApiDocument();
+
 
 builder.Services.AddControllersWithViews();
 
@@ -92,7 +94,11 @@ else
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
-
+#region Swagger
+app.UseOpenApi(); // serve OpenAPI/Swagger documents
+app.UseSwaggerUi3(); // serve Swagger UI
+app.UseReDoc();
+#endregion
 app.UseRouting();
 app.UseCors(CorsPolicy.AllowAll);
 app.UseAuthentication();

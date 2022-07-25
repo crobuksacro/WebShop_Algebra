@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using WebShop.Models.Dbo;
+using WebShop.Models.ViewModel;
 using WebShop.Services.Interface;
 
 namespace WebShop.Controllers
@@ -22,6 +23,7 @@ namespace WebShop.Controllers
 
 
         [Route("products")]
+        [ProducesResponseType(typeof(List<ProductViewModel>), StatusCodes.Status200OK)]
         public async Task<IActionResult> Products()
         {
             return Ok(await productService.GetProductsAsync());
