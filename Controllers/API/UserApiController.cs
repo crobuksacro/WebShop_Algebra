@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using WebShop.Models;
 using WebShop.Models.Binding;
@@ -18,7 +19,27 @@ namespace WebShop.Controllers
             this.signInManager = signInManager;
         }
 
+        [AllowAnonymous]
+        [Route("token")]
+        [HttpPost]
+        public async Task<IActionResult> Token([FromBody] TokenLoginBinding model)
+        {
+            if (ModelState.IsValid)
+            {
+                var token = await userSevice.GetToken(model);
+                if (string.IsNullOrWhiteSpace(token))
+                {
+                    return BadRequest(new
+                    {
+                        Msg = "Invalid username or password!",
+                    });
+                }
 
+                return Ok(new { token = token });
+            }
+
+            return BadRequest();
+        }
 
         [HttpPost]
         [Route("registration")]

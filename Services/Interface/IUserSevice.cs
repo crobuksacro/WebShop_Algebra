@@ -8,5 +8,6 @@ namespace WebShop.Services.Interface
     {
         Task<ApplicationUser?> CreateUserAsync(UserBinding model, string role);
         Task<ApplicationUserViewModel?> CreateApiUserAsync(UserBinding model, string role);
+        Task<string> GetToken(TokenLoginBinding model);
     }
 }

@@ -1,9 +1,6 @@
-﻿using WebShop.Models;
-using WebShop.Models.Binding;
-using WebShop.Services.Interface;
-using Microsoft.AspNetCore.Authorization;
+﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
-using AutoMapper;
+using WebShop.Services.Interface;
 
 namespace WebShop.Controllers
 {
