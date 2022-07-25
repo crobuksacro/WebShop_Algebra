@@ -69,7 +69,7 @@ namespace WebShop.Services.Implementation
                     Email = "ivan@ivan.hr",
                     UserName = "ivan@ivan.hr",
                     DOB = DateTime.Now.AddYears(-35),
-                    PhoneNumber = "+3859912345278",
+                    PhoneNumber = "+3859912345278", 
                     Adress = new List<Adress>
                     {
                         new Adress
