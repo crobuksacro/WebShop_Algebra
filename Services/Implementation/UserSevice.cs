@@ -7,6 +7,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 using WebShop.Data;
+using WebShop.Models;
 using WebShop.Models.Binding;
 using WebShop.Models.Dbo;
 using WebShop.Models.Dto;
@@ -36,7 +37,22 @@ namespace WebShop.Services.Implementation
             this.appSettings = appSettings.Value;
         }
 
+        public async Task<ApplicationUserViewModel> GetUser(string id)
+        {
+            var dboUser = await db.Users
+                .Include(x => x.Adress)
+                .FirstOrDefaultAsync(x => x.Id == id);
 
+            return mapper.Map<ApplicationUserViewModel>(dboUser);
+        }
+
+
+        public async Task<ApplicationUserViewModel> GetUser(ClaimsPrincipal user)
+        {
+            var userId = userManager.GetUserId(user);
+            return await GetUser(userId);
+
+        }
 
 
         /// <summary>
@@ -79,13 +95,52 @@ namespace WebShop.Services.Implementation
 
         public async Task<ApplicationUserViewModel?> CreateApiUserAsync(UserBinding model, string role)
         {
-            var result =await CreateUserAsync(model, role);
-            if(result == null)
+            var result = await CreateUserAsync(model, role);
+            if (result == null)
             {
                 return null;
             }
             return mapper.Map<ApplicationUserViewModel>(result);
 
+        }
+
+        public async Task<ApplicationUserViewModel?> CreateApiUserAsync(ApiBasicDataUser model)
+        {
+            var result = await CreateUserAsync(model, Roles.BasicUser);
+            if (result == null)
+            {
+                return null;
+            }
+            return mapper.Map<ApplicationUserViewModel>(result);
+
+        }
+
+
+        public async Task<ApplicationUser?> CreateUserAsync(ApiBasicDataUser model, string role)
+        {
+            var find = await userManager.FindByEmailAsync(model.Email);
+            if (find != null)
+            {
+                return null;
+            }
+
+            var user = new ApplicationUser
+            {
+                Email = model.Email,
+                UserName = model.Email,
+            };
+
+
+            var createdUser = await userManager.CreateAsync(user, model.Password);
+            if (createdUser.Succeeded)
+            {
+                var userAddedToRole = await userManager.AddToRoleAsync(user, role);
+                if (!userAddedToRole.Succeeded)
+                {
+                    throw new Exception("Korisnik nije dodan u rolu!");
+                }
+            }
+            return user;
         }
 
 

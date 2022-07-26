@@ -114,6 +114,7 @@ namespace WebShop.Services.Implementation
             user.EmailConfirmed = true;
             //Izraditi novog korisnika
             var createdUser = await userManager.CreateAsync(user, password);
+            
             //Provjeriti jeli korisnik uspješno dodan
             if (createdUser.Succeeded)
             {

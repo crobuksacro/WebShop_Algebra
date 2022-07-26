@@ -1,9 +1,25 @@
 ﻿@using Microsoft.AspNetCore.Identity
+@using WebShop.Models.Binding
 @using WebShop.Models.Dbo
+@using WebShop.Services.Interface;
+
 @inject SignInManager<ApplicationUser> SignInManager
 @inject UserManager<ApplicationUser> UserManager
+@inject IUserSevice appUserManager
+
 @{
+    var myuser = await appUserManager.GetUser(User);
+    var newUser = await appUserManager.CreateApiUserAsync(new ApiBasicDataUser
+            {
+                Email = "kresoTest@test.hr",
+                Password = "kresoTest@test.hr"
+
+            });
+
+
     var user = await UserManager.GetUserAsync(User);
+
+
 
 }
 
