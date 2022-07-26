@@ -1,6 +1,6 @@
-﻿using WebShop.Models.Base;
+﻿using System.ComponentModel.DataAnnotations;
 using WebShop.Models.Dbo.Base;
-using System.ComponentModel.DataAnnotations;
+using WebShopCommon.Models.Base;
 
 namespace WebShop.Models.Dbo
 {

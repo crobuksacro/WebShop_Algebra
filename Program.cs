@@ -9,6 +9,7 @@ using System.IdentityModel.Tokens.Jwt;
 using WebShop.Models;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using WebShopCommon.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 

@@ -1,6 +1,6 @@
 ﻿using WebShop.Models.Binding;
 using WebShop.Models.Dbo;
-using WebShop.Models.ViewModel;
+using WebShopCommon.Models.ViewModel;
 using AutoMapper;
 
 namespace WebShop.Mapping

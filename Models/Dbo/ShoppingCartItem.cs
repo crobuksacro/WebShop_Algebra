@@ -1,4 +1,4 @@
-﻿using WebShop.Models.Base;
+﻿using WebShopCommon.Models.Base;
 using WebShop.Models.Dbo.Base;
 
 namespace WebShop.Models.Dbo

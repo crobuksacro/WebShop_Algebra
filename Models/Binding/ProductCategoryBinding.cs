@@ -1,4 +1,4 @@
-﻿using WebShop.Models.Base;
+﻿using WebShopCommon.Models.Base;
 
 namespace WebShop.Models.Binding
 {

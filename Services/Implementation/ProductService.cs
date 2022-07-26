@@ -1,13 +1,14 @@
 ﻿using WebShop.Data;
 using WebShop.Models.Binding;
 using WebShop.Models.Dbo;
-using WebShop.Models.ViewModel;
+using WebShopCommon.Models.ViewModel;
 using WebShop.Services.Interface;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using WebShop.Models;
 using WebShop.Models.Dto;
 using Microsoft.Extensions.Options;
+using WebShopCommon.Models;
 
 namespace WebShop.Services.Implementation
 {
@@ -113,7 +114,7 @@ namespace WebShop.Services.Implementation
         public async Task<OrderViewModel> AddOrder(OrderBinding model)
         {
             var sc = await db.ShoppingCart.FirstOrDefaultAsync(x => x.Id == model.ShoppingCartId);
-            sc.ShoppingCartStatus = Models.ShoppingCartStatus.Succeeded;
+            sc.ShoppingCartStatus = ShoppingCartStatus.Succeeded;
             if (sc == null)
             {
                 return null;
@@ -198,7 +199,7 @@ namespace WebShop.Services.Implementation
                 .ThenInclude(x => x.Product)
                 .ThenInclude(x => x.ProductCategory)
 
-                .FirstOrDefaultAsync(x => x.ApplicationUser.Id == userId && x.ShoppingCartStatus == Models.ShoppingCartStatus.Pending);
+                .FirstOrDefaultAsync(x => x.ApplicationUser.Id == userId && x.ShoppingCartStatus == ShoppingCartStatus.Pending);
 
             if (shoppingCart == null)
             {
@@ -237,7 +238,7 @@ namespace WebShop.Services.Implementation
             {
                 ShoppingCartItems = new List<ShoppingCartItem> { shoppingCartItem },
                 ApplicationUser = user,
-                ShoppingCartStatus = Models.ShoppingCartStatus.Pending
+                ShoppingCartStatus = ShoppingCartStatus.Pending
 
             };
             db.ShoppingCart.Add(dbo);
@@ -279,7 +280,7 @@ namespace WebShop.Services.Implementation
             {
                 ShoppingCartItems = new List<ShoppingCartItem> { shoppingCartItem },
                 ApplicationUser = user,
-                ShoppingCartStatus = Models.ShoppingCartStatus.Pending
+                ShoppingCartStatus = ShoppingCartStatus.Pending
 
             };
             db.ShoppingCart.Add(dbo);

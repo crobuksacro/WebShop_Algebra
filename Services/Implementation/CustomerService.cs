@@ -1,10 +1,10 @@
-﻿using WebShop.Data;
-using WebShop.Models.ViewModel;
-using WebShop.Services.Interface;
-using AutoMapper;
+﻿using AutoMapper;
 using Microsoft.EntityFrameworkCore;
+using WebShop.Data;
 using WebShop.Models.Binding;
 using WebShop.Models.Dbo;
+using WebShop.Services.Interface;
+using WebShopCommon.Models.ViewModel;
 
 namespace WebShop.Services.Implementation
 {

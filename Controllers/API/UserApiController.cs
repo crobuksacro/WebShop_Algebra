@@ -1,10 +1,10 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using WebShop.Models;
 using WebShop.Models.Binding;
 using WebShop.Models.Dbo;
 using WebShop.Services.Interface;
+using WebShopCommon.Models;
 
 namespace WebShop.Controllers
 {

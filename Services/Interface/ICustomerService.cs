@@ -1,4 +1,4 @@
-﻿using WebShop.Models.ViewModel;
+﻿using WebShopCommon.Models.ViewModel;
 
 namespace WebShop.Services.Interface
 {

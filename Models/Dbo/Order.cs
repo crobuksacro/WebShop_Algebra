@@ -1,5 +1,5 @@
-﻿using WebShop.Models.Base;
-using WebShop.Models.Dbo.Base;
+﻿using WebShop.Models.Dbo.Base;
+using WebShopCommon.Models.Base;
 
 namespace WebShop.Models.Dbo
 {

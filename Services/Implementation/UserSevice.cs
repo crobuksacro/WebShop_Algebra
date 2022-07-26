@@ -11,9 +11,9 @@ using WebShop.Models;
 using WebShop.Models.Binding;
 using WebShop.Models.Dbo;
 using WebShop.Models.Dto;
-using WebShop.Models.ViewModel;
+using WebShopCommon.Models.ViewModel;
 using WebShop.Services.Interface;
-
+using WebShopCommon.Models;
 
 namespace WebShop.Services.Implementation
 {

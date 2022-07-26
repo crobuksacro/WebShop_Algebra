@@ -3,10 +3,10 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
-using WebShop.Models;
 using WebShop.Models.Binding;
-using WebShop.Models.ViewModel;
 using WebShop.Services.Interface;
+using WebShopCommon.Models;
+using WebShopCommon.Models.ViewModel;
 
 namespace WebShop.Controllers
 {

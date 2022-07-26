@@ -1,5 +1,5 @@
-﻿using WebShop.Models.Base;
-using WebShop.Models.ViewModel;
+﻿using WebShopCommon.Models.Base;
+using WebShopCommon.Models.ViewModel;
 
 namespace WebShop.Models.Binding
 {

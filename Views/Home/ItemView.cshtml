@@ -3,7 +3,7 @@
 @using WebShop.Services.Interface
 @inject UserManager<ApplicationUser> UserManager
 @inject IProductService productService
-@model WebShop.Models.ViewModel.ProductViewModel
+@model WebShopCommon.Models.ViewModel.ProductViewModel
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
     var user = await UserManager.GetUserAsync(User);
