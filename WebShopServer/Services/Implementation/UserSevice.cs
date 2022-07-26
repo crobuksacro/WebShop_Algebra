@@ -14,6 +14,7 @@ using WebShop.Models.Dto;
 using WebShopCommon.Models.ViewModel;
 using WebShop.Services.Interface;
 using WebShopCommon.Models;
+using WebShopCommon.Models.Binding;
 
 namespace WebShop.Services.Implementation
 {

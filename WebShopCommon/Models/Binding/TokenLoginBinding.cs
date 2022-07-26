@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
-namespace WebShop.Models.Binding
+namespace WebShopCommon.Models.Binding
 {
     public class TokenLoginBinding
     {

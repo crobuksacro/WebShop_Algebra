@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebShop", "WebShop.csproj",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebShopCommon", "..\WebShopCommon\WebShopCommon.csproj", "{7F664911-D95A-4229-91D2-811346ACA9F2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebShopClientApp", "..\WebShopClientApp\WebShopClientApp.csproj", "{4888CAA3-12CE-40D2-8D35-3FD5EAD99C31}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{7F664911-D95A-4229-91D2-811346ACA9F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7F664911-D95A-4229-91D2-811346ACA9F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7F664911-D95A-4229-91D2-811346ACA9F2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4888CAA3-12CE-40D2-8D35-3FD5EAD99C31}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4888CAA3-12CE-40D2-8D35-3FD5EAD99C31}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4888CAA3-12CE-40D2-8D35-3FD5EAD99C31}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4888CAA3-12CE-40D2-8D35-3FD5EAD99C31}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

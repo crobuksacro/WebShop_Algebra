@@ -5,6 +5,8 @@ using WebShop.Models.Binding;
 using WebShop.Models.Dbo;
 using WebShop.Services.Interface;
 using WebShopCommon.Models;
+using WebShopCommon.Models.Binding;
+using WebShopCommon.Models.ViewModel;
 
 namespace WebShop.Controllers
 {
@@ -35,7 +37,7 @@ namespace WebShop.Controllers
                     });
                 }
 
-                return Ok(new { token = token });
+                return Ok(new TokenResponse { Token = token });
             }
 
             return BadRequest();

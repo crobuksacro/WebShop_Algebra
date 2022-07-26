@@ -1,6 +1,7 @@
 ﻿using System.Security.Claims;
 using WebShop.Models.Binding;
 using WebShop.Models.Dbo;
+using WebShopCommon.Models.Binding;
 using WebShopCommon.Models.ViewModel;
 
 namespace WebShop.Services.Interface
