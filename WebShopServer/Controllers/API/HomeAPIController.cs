@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using WebShop.Models.Dbo;
 using WebShop.Services.Interface;
@@ -7,6 +8,7 @@ namespace WebShop.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class HomeAPIController : ControllerBase
     {
         private readonly ILogger<HomeController> _logger;
@@ -20,7 +22,7 @@ namespace WebShop.Controllers
         }
 
 
-
+        [HttpGet]
         [Route("products")]
         public async Task<IActionResult> Products()
         {

@@ -7,5 +7,6 @@ namespace WebShopCommon.Service.Interface
     {
         Task<TokenResponse> GetToken(TokenLoginBinding model);
         Task<List<ProductCategoryViewModel>> ProductCategorys(string token);
+        Task<List<ProductViewModel>> GetProducts(string token);
     }
 }

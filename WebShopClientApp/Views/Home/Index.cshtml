@@ -1,8 +1,46 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿@using WebShopCommon.Models.ViewModel
+@model List<ProductViewModel>
+@{
+    int counter = 1;
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Naziv</th>
+            <th scope="col">Opis</th>
+            <th scope="col">Cijena</th>
+            <th scope="col">Detalji</th>
+        </tr>
+    </thead>
+    <tbody>
+
+        @foreach (var product in Model)
+        {
+            decimal price = product.Price * 1.25M;
+
+            <tr>
+                <th scope="row">@counter</th>
+                <td>@product.Title</td>
+                <td>@product.Description</td>
+                <td>@string.Format("{0:C}",price)</td>
+                <td>
+                    @if(product.Quantity > 0)
+                    {
+                        <a href="@Url.Action("ItemView", "Home",new {id = product.Id})" class="btn btn-success">Detalji</a>
+                    }
+                    else
+                    {
+                        <span>Proizvod nije dostupan</span>
+                    }
+
+                </td>
+            </tr>
+            counter++;
+        }
+
+
+
+    </tbody>
+</table>

@@ -11,28 +11,33 @@ namespace WebShopClientApp.Controllers
         private readonly ILogger<HomeController> _logger;
 
         private readonly IWebShopServiceClient webShopServiceClient;
+        private readonly string token;
+
 
         public HomeController(ILogger<HomeController> logger, IWebShopServiceClient webShopServiceClient)
         {
             this.webShopServiceClient = webShopServiceClient;
 
-            var token = webShopServiceClient.GetToken(
+             token = webShopServiceClient.GetToken(
                 new TokenLoginBinding
                 {
                     UserName = "ivan@neostar.com",
                     Password = "Pa$$word321"
 
-                }).Result;
+                }).Result.Token;
 
-            var categorys = webShopServiceClient.ProductCategorys(token.Token).Result;
+            var categorys = webShopServiceClient.ProductCategorys(token).Result;
 
 
             _logger = logger;
         }
 
-        public IActionResult Index()
+        public async  Task<IActionResult> Index()
         {
-            return View();
+            var products =await webShopServiceClient.GetProducts(token);
+
+
+            return View(products);
         }
 
         public IActionResult Privacy()
