@@ -39,7 +39,25 @@ namespace WebShop.Controllers
         [ProducesResponseType(typeof(ProductViewModel), StatusCodes.Status200OK)]
         public async Task<IActionResult> AddProductAsync(ProductBinding model)
         {
-            return Ok(await productService.AddProductAsync(model));
+            if (ModelState.IsValid)
+            {
+                return Ok(await productService.AddProductAsync(model));
+            }
+            return BadRequest(ValidationMsgResponse(ModelState.Values));
+
+        }
+
+        public ApiResponseViewModel ValidationMsgResponse(Microsoft.AspNetCore.Mvc.ModelBinding.ModelStateDictionary.ValueEnumerable input)
+        {
+            ApiResponseViewModel response = new ApiResponseViewModel();
+            foreach (var modelState in input)
+            {
+                foreach (var error in modelState.Errors)
+                {
+                    response.Message += ", " + error.ErrorMessage;
+                }
+            }
+            return response;
         }
 
         [HttpPut]

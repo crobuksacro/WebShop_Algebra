@@ -25,6 +25,11 @@ namespace WebShop.Services.Implementation
             this.mapper = mapper;
         }
 
+        public async Task<bool> ProductIdValid(int id)
+        {
+            return await db.Product.FindAsync(id) != null;
+        }
+
         /// <summary>
         /// Storniraj po id-u narudzbu
         /// </summary>

@@ -38,6 +38,12 @@ namespace WebShop.Services.Implementation
             this.appSettings = appSettings.Value;
         }
 
+        public async Task<bool> EmailPresentValidation(string email)
+        {
+         return db.Users.FirstOrDefaultAsync(x => x.Email == email) != null;
+
+        }
+
         public async Task<ApplicationUserViewModel> GetUser(string id)
         {
             var dboUser = await db.Users
