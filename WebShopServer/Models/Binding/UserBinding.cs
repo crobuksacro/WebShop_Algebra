@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using WebShop.Validation;
 
 namespace WebShop.Models.Binding
 {
@@ -10,7 +11,7 @@ namespace WebShop.Models.Binding
         public string Lastname { get; set; }
         //Validirati DOB min 18g
         public DateTime DOB { get; set; }
-        //Validirati Email uniq
+        [UserEmailValidation]
         public string Email { get; set; }
         //Validirati Password > 7znakova 
         public string Password { get; set; }

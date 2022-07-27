@@ -1,4 +1,5 @@
-﻿using WebShopCommon.Models.Base;
+﻿using WebShop.Validation;
+using WebShopCommon.Models.Base;
 
 namespace WebShop.Models.Binding
 {
@@ -8,7 +9,7 @@ namespace WebShop.Models.Binding
 
     public class ProductCategoryUpdateBinding : ProductCategoryBinding
     {
-        //Validirati Id
+        [ProductCategoryIdValidation]
         public int Id { get; set; }
     }
 }

@@ -1,8 +1,10 @@
-﻿namespace WebShop.Models.Binding
+﻿using WebShop.Validation;
+
+namespace WebShop.Models.Binding
 {
     public class OrderBinding
     {
-        //Validirati ShoppingCartId
+        [ShoppingCartIdValidation]
         public int ShoppingCartId { get; set; }
     }
 }
