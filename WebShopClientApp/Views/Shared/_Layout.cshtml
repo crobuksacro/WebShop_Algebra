@@ -1,4 +1,21 @@
-﻿<!DOCTYPE html>
+﻿@using WebShopCommon.Service.Interface
+@using WebShopCommon.Models.Binding
+@inject IWebShopServiceClient webShopServiceClient
+@{
+    var token = await webShopServiceClient.GetToken(
+                new TokenLoginBinding
+                        {
+                            UserName = "ivan@neostar.com",
+                            Password = "Pa$$word321"
+
+                        });
+
+    var userInfo = await webShopServiceClient.GetUser(token.Token);
+}
+
+
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -24,6 +41,9 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                        </li>
+                        <li class="nav-item">
+                            <span class="nav-link text-dark">Pozdrav @userInfo.Firstname @userInfo.Lastname !!!!!</span>
                         </li>
                     </ul>
                 </div>

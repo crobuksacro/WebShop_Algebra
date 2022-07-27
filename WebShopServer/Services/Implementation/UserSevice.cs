@@ -7,14 +7,13 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 using WebShop.Data;
-using WebShop.Models;
 using WebShop.Models.Binding;
 using WebShop.Models.Dbo;
 using WebShop.Models.Dto;
-using WebShopCommon.Models.ViewModel;
 using WebShop.Services.Interface;
 using WebShopCommon.Models;
 using WebShopCommon.Models.Binding;
+using WebShopCommon.Models.ViewModel;
 
 namespace WebShop.Services.Implementation
 {

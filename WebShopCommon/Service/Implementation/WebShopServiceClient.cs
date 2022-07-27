@@ -47,5 +47,17 @@ namespace WebShopCommon.Service.Implementation
             return JsonConvert.DeserializeObject<List<ProductViewModel>>(content);
         }
 
+        public async Task<ApplicationUserViewModel> GetUser(string token)
+        {
+            string targetUrl = $"/api/HomeAPI/user-info";
+            var response = await DoRequest(targetUrl, HttpMethod.Get, token);
+            if (!response.IsSuccessStatusCode)
+            {
+                throw new Exception();
+            }
+            var content = await response.Content.ReadAsStringAsync();
+            return JsonConvert.DeserializeObject<ApplicationUserViewModel>(content);
+        }
+
     }
 }
