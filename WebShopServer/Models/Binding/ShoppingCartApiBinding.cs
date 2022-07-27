@@ -7,9 +7,9 @@ namespace WebShop.Models.Binding
     {
         [ProductIdValidation]
         public int ProductId { get; set; }
-        //Validirati Quantity > 0
+        [DecimalValueGreaterThanZero]
         public decimal Quantity { get; set; }
-        //Validirati Price > 0
+        [DecimalValueGreaterThanZero]
         public decimal Price { get; set; }
         [ShoppingCartIdValidation]
         public int? ShoppingCartId { get; set; }

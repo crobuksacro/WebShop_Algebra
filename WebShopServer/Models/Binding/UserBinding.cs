@@ -13,7 +13,7 @@ namespace WebShop.Models.Binding
         public DateTime DOB { get; set; }
         [UserEmailValidation]
         public string Email { get; set; }
-        //Validirati Password > 7znakova 
+        [StringGreaterThanThanSeven]
         public string Password { get; set; }
         public AdressBinding UserAdress { get; set; }
     }

@@ -5,11 +5,11 @@ namespace WebShop.Models.Binding
 {
     public class ShoppingCartBinding : ShoppingCartBase
     {
-        //Validirati ProductId 
+        [ProductIdValidation]
         public int ProductId { get; set; }
-        //Validirati Quantity > 0 
+        [DecimalValueGreaterThanZero]
         public decimal Quantity { get; set; }
-        //Validirati Price > 0 
+        [DecimalValueGreaterThanZero]
         public decimal Price { get; set; }
         [UserIdValidation]
         public string UserId { get; set; }
