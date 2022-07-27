@@ -8,6 +8,7 @@ namespace WebShop.Models.Binding
 
     public class ProductCategoryUpdateBinding : ProductCategoryBinding
     {
+        //Validirati Id
         public int Id { get; set; }
     }
 }

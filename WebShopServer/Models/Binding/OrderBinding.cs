@@ -2,6 +2,7 @@
 {
     public class OrderBinding
     {
+        //Validirati ShoppingCartId
         public int ShoppingCartId { get; set; }
     }
 }
