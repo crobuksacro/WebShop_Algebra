@@ -350,10 +350,15 @@ namespace WebShop.Services.Implementation
         public async Task<ProductViewModel> AddProductAsync(ProductBinding model)
         {
             var dbo = mapper.Map<Product>(model);
-            var fileResponse = await fileStorageService.AddFileToStorage(model.ProductImg);
-            if (fileResponse != null)
+
+            if (model.ProductImg != null)
             {
-                dbo.ProductImgUrl = fileResponse.DownloadUrl;
+                var fileResponse = await fileStorageService.AddFileToStorage(model.ProductImg);
+                if (fileResponse != null)
+                {
+                    dbo.ProductImgUrl = fileResponse.DownloadUrl;
+                }
+
             }
 
 

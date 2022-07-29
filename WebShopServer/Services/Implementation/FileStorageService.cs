@@ -49,6 +49,52 @@ namespace WebShop.Services.Implementation
 
         }
 
+        public async Task<bool> DeleteFile(int id)
+        {
+
+
+            try
+            {
+                var file = await db.FileStorage.FindAsync(id);
+                if(file != null)
+                {
+                    DeletePhysicalFile(file.PhysicalPath);
+                    db.FileStorage.Remove(file);
+                    await db.SaveChangesAsync();
+                }
+
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+
+                return false;
+            }
+
+
+
+        }
+
+
+        public bool DeletePhysicalFile(string filePath)
+        {
+            try
+            {
+                System.IO.File.Delete(filePath);
+                return true;
+
+            }
+            catch (Exception)
+            {
+
+                return false;
+            }
+
+
+        }
+
+
         /// <summary>
         /// Get file by file id
         /// </summary>
@@ -94,6 +140,7 @@ namespace WebShop.Services.Implementation
             string folderPath = env.ContentRootPath + @"\WebShop\upload\" + fileuploadId;
             Directory.CreateDirectory(folderPath);
             var filePath = Path.Combine(folderPath, file.FileName);
+
             using (var stream = System.IO.File.Create(filePath))
             {
                 await file.CopyToAsync(stream);
