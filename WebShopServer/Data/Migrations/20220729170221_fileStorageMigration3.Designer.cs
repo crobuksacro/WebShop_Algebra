@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WebShop.Data;
 
@@ -11,9 +12,10 @@ using WebShop.Data;
 namespace WebShop.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220729170221_fileStorageMigration3")]
+    partial class fileStorageMigration3
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -276,12 +278,6 @@ namespace WebShop.Data.Migrations
                     b.Property<string>("DownloadUrl")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("FileExtension")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("FileName")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("PhysicalPath")
                         .HasColumnType("nvarchar(max)");
 
@@ -334,9 +330,6 @@ namespace WebShop.Data.Migrations
 
                     b.Property<int>("ProductCategoryId")
                         .HasColumnType("int");
-
-                    b.Property<string>("ProductImgUrl")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<decimal>("Quantity")
                         .HasColumnType("decimal(9,2)");

@@ -30,6 +30,14 @@ namespace WebShop.Mapping
             CreateMap<UserBinding, ApplicationUser>()
                 .ForMember(dst=> dst.UserName, opts => opts.MapFrom(src=> src.Email))
                 .ForMember(dst => dst.EmailConfirmed, opts => opts.MapFrom(src => true));
+
+
+            CreateMap<FileStorage, FileStorageViewModel>();
+            CreateMap<FileStorage, FileStorageExpendedViewModel>();
+            
+
+            CreateMap<FileStorageViewModel, FileStorage>().
+                ForMember(dst => dst.Id, opts => opts.Ignore());
         }
     }
 }
