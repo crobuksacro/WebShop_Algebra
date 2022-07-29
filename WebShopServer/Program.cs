@@ -10,6 +10,8 @@ using WebShop.Models;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using WebShopCommon.Models;
+using WebShopCommon.Service.Interface;
+using WebShopCommon.Service.Implementation;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -57,6 +59,7 @@ builder.Services.AddControllersWithViews();
 builder.Services.Configure<AppConfig>(builder.Configuration);
 builder.Services.AddSingleton<IIdentityService, IdentityService>();
 builder.Services.AddScoped<IUserSevice, UserSevice>();
+builder.Services.AddScoped<IWebShopCommonSharedService, WebShopCommonSharedService>();
 builder.Services.AddScoped<IValidationService, ValidationService>();
 builder.Services.AddScoped<IProductService, ProductService>();
 builder.Services.AddScoped<ICustomerService, CustomerService>();

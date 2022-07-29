@@ -16,7 +16,7 @@
     </thead>
     <tbody>
 
-        @foreach (var product in Model)
+        @foreach (var product in Model.OrderBy(x=> Guid.NewGuid()))
         {
             decimal price = product.Price * 1.25M;
 

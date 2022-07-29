@@ -8,6 +8,7 @@ using WebShop.Models.Dto;
 using WebShop.Services.Interface;
 using WebShopCommon.Models;
 using WebShopCommon.Models.ViewModel;
+using WebShopCommon.Service.Interface;
 
 namespace WebShop.Services.Implementation
 {
@@ -16,12 +17,13 @@ namespace WebShop.Services.Implementation
         private readonly ApplicationDbContext db;
         private readonly IMapper mapper;
         private readonly AppConfig appConfig;
-
-        public ProductService(ApplicationDbContext db, IMapper mapper, IOptions<AppConfig> appConfig)
+        private readonly IWebShopCommonSharedService webShopCommonSharedService;
+        public ProductService(ApplicationDbContext db, IMapper mapper, IOptions<AppConfig> appConfig, IWebShopCommonSharedService webShopCommonSharedService)
         {
             this.appConfig = appConfig.Value;
             this.db = db;
             this.mapper = mapper;
+            this.webShopCommonSharedService = webShopCommonSharedService;
         }
 
         /// <summary>
@@ -376,8 +378,29 @@ namespace WebShop.Services.Implementation
             var dbo = await db.Product
                 .Include(x=>x.ProductCategory)
                 .ToListAsync();
-            return dbo.Select(x => mapper.Map<ProductViewModel>(x)).ToList();
+            //webShopCommonSharedService
+            var model = dbo.Select(x => mapper.Map<ProductViewModel>(x)).ToList();
 
+            //var randomByQuery = model.OrderBy(x => Guid.NewGuid()).ToList();
+
+            // var response = new List<ProductViewModel>();
+            //var randomList = webShopCommonSharedService.GetRandomNumberList(model.First().Id, model.Last().Id);
+
+            // foreach (var item in randomList)
+            // {
+            //     var find = model.FirstOrDefault(x => x.Id == item);
+            //     if(find != null)
+            //     {
+            //         response.Add(find);
+            //     }
+            // }
+
+
+            //return response;
+
+            //return dbo.Select(x => mapper.Map<ProductViewModel>(x)).OrderBy(x => Guid.NewGuid()).ToList();
+
+            return dbo.Select(x => mapper.Map<ProductViewModel>(x)).ToList();
         }
         /// <summary>
         /// Dodaj kategoriju proizvoda
