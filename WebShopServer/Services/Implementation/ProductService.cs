@@ -14,16 +14,20 @@ namespace WebShop.Services.Implementation
 {
     public class ProductService : IProductService
     {
+        private readonly IFileStorageService fileStorageService;
         private readonly ApplicationDbContext db;
         private readonly IMapper mapper;
         private readonly AppConfig appConfig;
         private readonly IWebShopCommonSharedService webShopCommonSharedService;
-        public ProductService(ApplicationDbContext db, IMapper mapper, IOptions<AppConfig> appConfig, IWebShopCommonSharedService webShopCommonSharedService)
+        public ProductService(ApplicationDbContext db,
+            IMapper mapper, IOptions<AppConfig> appConfig, IWebShopCommonSharedService webShopCommonSharedService,
+            IFileStorageService fileStorageService)
         {
             this.appConfig = appConfig.Value;
             this.db = db;
             this.mapper = mapper;
             this.webShopCommonSharedService = webShopCommonSharedService;
+            this.fileStorageService = fileStorageService;
         }
 
         /// <summary>
@@ -302,7 +306,7 @@ namespace WebShop.Services.Implementation
 
 
             var presentShoppingCartItem = dbo.ShoppingCartItems.FirstOrDefault(x => x.Product.Id == model.ProductId);
-           
+
 
             if (presentShoppingCartItem != null)
             {
@@ -346,6 +350,13 @@ namespace WebShop.Services.Implementation
         public async Task<ProductViewModel> AddProductAsync(ProductBinding model)
         {
             var dbo = mapper.Map<Product>(model);
+            var fileResponse = await fileStorageService.AddFileToStorage(model.ProductImg);
+            if (fileResponse != null)
+            {
+                dbo.ProductImgUrl = fileResponse.DownloadUrl;
+            }
+
+
             var productCategory = await db.ProductCategory.FindAsync(model.ProductCategoryId);
             if (productCategory == null)
             {
@@ -376,9 +387,9 @@ namespace WebShop.Services.Implementation
         public async Task<List<ProductViewModel>> GetProductsAsync()
         {
             var dbo = await db.Product
-                .Include(x=>x.ProductCategory)
+                .Include(x => x.ProductCategory)
                 .ToListAsync();
- 
+
             //var model = dbo.Select(x => mapper.Map<ProductViewModel>(x)).ToList();
 
             //var randomByQuery = model.OrderBy(x => Guid.NewGuid()).ToList();

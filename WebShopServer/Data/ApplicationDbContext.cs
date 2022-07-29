@@ -72,6 +72,7 @@ namespace WebShop.Data
         public DbSet<ShoppingCartItem> ShoppingCartItem { get; set; }
         public DbSet<ShoppingCart> ShoppingCart { get; set; }
         public DbSet<Order> Order { get; set; }
+        public DbSet<FileStorage> FileStorage { get; set; }
 
     }
 }

@@ -33,6 +33,8 @@ namespace WebShop.Mapping
 
 
             CreateMap<FileStorage, FileStorageViewModel>();
+            CreateMap<FileStorageViewModel, FileStorage>().
+                ForMember(dst => dst.Id, opts => opts.Ignore());
         }
     }
 }

@@ -9,5 +9,6 @@ namespace WebShop.Models.Dbo
         public DateTime Created { get; set; }
         public ProductCategory ProductCategory { get; set; }
 
+
     }
 }
