@@ -378,8 +378,8 @@ namespace WebShop.Services.Implementation
             var dbo = await db.Product
                 .Include(x=>x.ProductCategory)
                 .ToListAsync();
-            //webShopCommonSharedService
-            var model = dbo.Select(x => mapper.Map<ProductViewModel>(x)).ToList();
+ 
+            //var model = dbo.Select(x => mapper.Map<ProductViewModel>(x)).ToList();
 
             //var randomByQuery = model.OrderBy(x => Guid.NewGuid()).ToList();
 
