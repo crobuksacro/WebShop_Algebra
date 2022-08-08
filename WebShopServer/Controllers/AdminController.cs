@@ -10,14 +10,42 @@ namespace WebShop.Controllers
     [Authorize(Roles = Roles.Admin)]
     public class AdminController : Controller
     {
+        private readonly IUserSevice userSevice;
         private readonly IProductService productService;
         private readonly IMapper mapper;
 
 
-        public AdminController(IProductService productService, IMapper mapper)
+        public AdminController(IProductService productService, IMapper mapper, IUserSevice userSevice)
         {
+            this.userSevice = userSevice;
             this.mapper = mapper;
             this.productService = productService;
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Users()
+        {
+            var users = await userSevice.GetUsers();
+            return View(users);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> CreateNewUser()
+        {
+            return View();
+        }
+        [HttpGet]
+        public async Task<IActionResult> DeleteUser(string id)
+        {
+            await userSevice.DeleteUserAsync(id);
+            return RedirectToAction("Users");
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> CreateNewUser(UserAdminBinding model)
+        {
+            await userSevice.CreateUserAsync(model);
+            return RedirectToAction("Users");
         }
 
         [HttpGet]
@@ -25,7 +53,7 @@ namespace WebShop.Controllers
         {
             var order = await productService.SuspendOrder(id);
             return RedirectToAction("Orders");
-        } 
+        }
 
 
         [HttpGet]

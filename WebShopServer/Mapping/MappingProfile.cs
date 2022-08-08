@@ -2,6 +2,7 @@
 using WebShop.Models.Dbo;
 using WebShopCommon.Models.ViewModel;
 using AutoMapper;
+using Microsoft.AspNetCore.Identity;
 
 namespace WebShop.Mapping
 {
@@ -9,6 +10,8 @@ namespace WebShop.Mapping
     {
         public MappingProfile()
         {
+
+            CreateMap<IdentityRole, UserRolesViewModel>();
             CreateMap<ProductBinding, Product>();
             CreateMap<Product, ProductViewModel>();
             CreateMap<ProductCategoryBinding, ProductCategory>();
@@ -28,13 +31,13 @@ namespace WebShop.Mapping
             CreateMap<AdressBinding, Adress>();
             CreateMap<Adress, AdressViewModel>();
             CreateMap<UserBinding, ApplicationUser>()
-                .ForMember(dst=> dst.UserName, opts => opts.MapFrom(src=> src.Email))
+                .ForMember(dst => dst.UserName, opts => opts.MapFrom(src => src.Email))
                 .ForMember(dst => dst.EmailConfirmed, opts => opts.MapFrom(src => true));
 
 
             CreateMap<FileStorage, FileStorageViewModel>();
             CreateMap<FileStorage, FileStorageExpendedViewModel>();
-            
+
 
             CreateMap<FileStorageViewModel, FileStorage>().
                 ForMember(dst => dst.Id, opts => opts.Ignore());

@@ -3,7 +3,13 @@ using WebShop.Validation;
 
 namespace WebShop.Models.Binding
 {
-    public class UserBinding
+    public class UserBinding: UserBaseBinding
+    {
+        public AdressBinding UserAdress { get; set; }
+    }
+
+
+    public class UserBaseBinding
     {
         //Validirati empty
         public string Firstname { get; set; }
@@ -15,6 +21,12 @@ namespace WebShop.Models.Binding
         public string Email { get; set; }
         [StringGreaterThanThanSeven]
         public string Password { get; set; }
-        public AdressBinding UserAdress { get; set; }
     }
+
+    public class UserAdminBinding: UserBaseBinding
+    {
+        public string RoleId { get; set; }
+    }
+
+
 }

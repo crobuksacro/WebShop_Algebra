@@ -1,7 +1,6 @@
-﻿using WebShop.Models;
+﻿using Microsoft.AspNetCore.Identity;
 using WebShop.Models.Dbo;
 using WebShop.Services.Interface;
-using Microsoft.AspNetCore.Identity;
 using WebShopCommon.Models;
 
 namespace WebShop.Services.Implementation

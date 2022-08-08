@@ -43,9 +43,14 @@
 
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link text-dark" href="@Url.Action("Users", "Admin")">Administracija korisnika</a>
+
+                </li>
+                <li class="nav-item">
                     <a class="nav-link text-dark" href="@Url.Action("Orders", "Admin")">Narudžbe</a>
 
                 </li>
+
                 break;
             case Roles.Employee:
             case Roles.BasicUser:
