@@ -28,5 +28,11 @@ namespace WebShop.Models.Binding
         public string RoleId { get; set; }
     }
 
+    public class UserAdminUpdateBinding : UserAdminBinding
+    {
+        public string Id { get; set; }
+    }
+
+
 
 }

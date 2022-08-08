@@ -35,6 +35,22 @@ namespace WebShop.Controllers
             return View();
         }
         [HttpGet]
+        public async Task<IActionResult> EditUser(string id)
+        {
+            var user = await userSevice.GetUser(id);
+            return View(user);
+        }
+
+
+        [HttpPost]
+        public async Task<IActionResult> EditUser(UserAdminUpdateBinding model)
+        {
+            await userSevice.UpdateUser(model);
+            return RedirectToAction("Users");
+        }
+
+
+        [HttpGet]
         public async Task<IActionResult> DeleteUser(string id)
         {
             await userSevice.DeleteUserAsync(id);

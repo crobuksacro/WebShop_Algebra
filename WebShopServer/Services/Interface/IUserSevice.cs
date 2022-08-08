@@ -8,6 +8,7 @@ namespace WebShop.Services.Interface
 {
     public interface IUserSevice
     {
+        Task<ApplicationUserViewModel> UpdateUser(UserAdminUpdateBinding model);
         Task DeleteUserAsync(string id);
         Task<ApplicationUserViewModel?> CreateUserAsync(UserAdminBinding model);
         Task<List<UserRolesViewModel>> GetUserRoles();
